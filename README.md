@@ -30,8 +30,10 @@ Desafio 01 - Sistema para busca e alteração de livros e autores em uma bibliot
 
 ## DB MODEL
 
-file:///home/dlnz/Downloads/model-database-biblioteca.png![image](https://user-images.githubusercontent.com/44629124/126782251-8e5b44d8-a39b-4c7c-825e-c486583560ea.png)
+(https://user-images.githubusercontent.com/44629124/126782251-8e5b44d8-a39b-4c7c-825e-c486583560ea.png)
 
+
+```sql
 Enum LifecycleStatus {
   ACTIVE
   DELETED
