@@ -1,5 +1,5 @@
 ## Mini-Biblioteca
-Desafio 01 - Sistema para busca e alteração de livros e autores em uma biblioteca
+Desafio 01 - Sistema para busca e gerenciamento de livros e autores em uma biblioteca
 
 ## Características do Sistema
 
@@ -10,13 +10,13 @@ Desafio 01 - Sistema para busca e alteração de livros e autores em uma bibliot
 - Atualizar um livro
 - Deletar um livro
 
-
 ### Autores
 - Buscar todos os autores
 - Buscar um autor
 - Registrar um autor
 - Atualizar autor
 - Deletar autor
+
 
 ## Regras de negócio
 
@@ -28,9 +28,9 @@ Desafio 01 - Sistema para busca e alteração de livros e autores em uma bibliot
 - Todos os autores podem ser modificados por qualquer um
 - Um autor pode conter vários livros
 
+
 ## DB MODEL
 file:///home/dlnz/Downloads/model-database-biblioteca.png![image](https://user-images.githubusercontent.com/44629124/126783228-86e7df35-37af-4746-a8a4-9819658fa950.png)
-
 
 ```sql
 Enum LifecycleStatus {
@@ -43,7 +43,7 @@ table livro {
   nome_completo varchar(50)
   nome_resumido varchar(50)
   numero_paginas int
-  sinopse varchar
+  sinopse varchar(200)
   genero varchar
   id_autor ref
   
@@ -59,6 +59,7 @@ table autor {
   aniversario string
   genero varchar
   qtd_livros_publicados int
+  
   status LifecycleStatus
 
   created_at timestamp
