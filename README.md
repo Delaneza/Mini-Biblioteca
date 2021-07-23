@@ -30,7 +30,7 @@ Desafio 01 - Sistema para busca e alteração de livros e autores em uma bibliot
 
 ## DB MODEL
 
-(https://user-images.githubusercontent.com/44629124/126782251-8e5b44d8-a39b-4c7c-825e-c486583560ea.png)
+![DB model]file:///home/dlnz/Downloads/model-database-biblioteca.png![image](https://user-images.githubusercontent.com/44629124/126782525-4cf13bf2-ec30-4270-a8c9-02a84e716ece.png)
 
 
 ```sql
