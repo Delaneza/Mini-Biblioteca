@@ -1,7 +1,7 @@
 ## Mini-Biblioteca
 Desafio 01 - Sistema para busca e alteração de livros e autores em uma biblioteca
 
-## System features
+## Características do Sistema
 
 ### Livros
 - Buscar todos os livros
@@ -29,8 +29,7 @@ Desafio 01 - Sistema para busca e alteração de livros e autores em uma bibliot
 - Um autor pode conter vários livros
 
 ## DB MODEL
-
-![DB model]file:///home/dlnz/Downloads/model-database-biblioteca.png![image](https://user-images.githubusercontent.com/44629124/126782525-4cf13bf2-ec30-4270-a8c9-02a84e716ece.png)
+file:///home/dlnz/Downloads/model-database-biblioteca.png![image](https://user-images.githubusercontent.com/44629124/126783228-86e7df35-37af-4746-a8a4-9819658fa950.png)
 
 
 ```sql
