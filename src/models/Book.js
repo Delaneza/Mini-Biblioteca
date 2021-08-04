@@ -8,6 +8,9 @@ class Book extends Model {
             pages: DataTypes.INTEGER,
             synopsis: DataTypes.STRING,
             gender: DataTypes.STRING,
+            year: DataTypes.STRING,
+            publishing_company: DataTypes.STRING,
+            status: DataTypes.ENUM(['ACTIVE', 'DELETED'])
         }, {
             sequelize
         })

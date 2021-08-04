@@ -1,24 +1,20 @@
-const Book = require('../models/Book')
-const Author = require('../models/Author')
+const BookService = require('../service/BookService')
+const bookService = new BookService()
 
 module.exports = {
 
     async index(_, res, next) {
-        const books = await Book.findAll()
+        const books = await bookService.getAll()
 
-        return res.json(books)
+        res.json(books)
 
         next()
     },
     
     async getByPk(req, res, next) {
-        const book = await Book.findByPk(req.params.id)
+        const book = await bookService.getByPk(req.params.id)
 
-        if(!book) {
-            return res.status(400).json({ error: 'Book not found' })
-        }
-
-        return res.json(book)
+        res.json(book)
 
         next()
     },
@@ -26,61 +22,56 @@ module.exports = {
     
     async store(req, res, next) {
 
-        const { author_id } = req.params
-        const { full_name, short_name, pages, synopsis, gender } = req.body
+        const { full_name, short_name, pages, synopsis, gender, year, publishing_company, author_id, status } = req.body
 
-        const author = await Author.findByPk(author_id)
-
-        if(!author) {
-            return res.status(400).json({ error: 'Author not found' })
-        }
-
-        const book = await Book.create({ 
+        const book = await bookService.store({ 
             full_name, 
             short_name, 
             pages, 
             synopsis, 
             gender,
-            author_id
+            year,
+            publishing_company,
+            author_id,
+            status
         })
 
-        return res.status(200).json(book)
+        res.status(200).json(book)
 
         next()
     },
 
     async update(req, res, next) {
 
-        const { id } = req.params
-        const { full_name, short_name, pages, synopsis, gender } = req.body
+        const { full_name, short_name, pages, synopsis, gender, year, publishing_company, author_id, status } = req.body
 
-        if (!id) {
-            res.status(400).json('Book not found')
-        }
-
-        await Book.update({ 
+        await bookService.update({
             full_name, 
             short_name, 
             pages, 
             synopsis, 
-            gender 
-        },
-            { where: { id: req.params.id }
-        })
-
-        return res.status(200).json('Book Updated')
+            gender,
+            year,
+            publishing_company,
+            author_id,
+            status
+            },
+            {  id:req.params.id } 
+        )
+        
+        res.status(200).json('Book updated!')
         
         next()
     },
 
     async delete(req, res, next) {
-
-        await Book.destroy({ 
-            where: { id: req.params.id }
-        })
-
-        return res.status(200).json('book Deleted')
-
+        
+        await bookService.delete(
+            { id: req.params.id }
+        )
+        
+        res.status(200).json('Book deleted!')
+        
         next()
     }
 

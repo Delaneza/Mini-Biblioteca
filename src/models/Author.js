@@ -6,14 +6,15 @@ class Author extends Model {
             full_name: DataTypes.STRING,
             birthday: DataTypes.STRING,
             gender: DataTypes.STRING,
-            published_books: DataTypes.INTEGER
+            published_books: DataTypes.INTEGER,
+            status: DataTypes.ENUM(['ACTIVE', 'DELETED'])
         }, {
             sequelize
         })
     }
 
     static associate(models) {
-        this.belongsTo(models.Book, { foreignKey: 'id', as: 'book_id' })
+        this.hasMany(models.Book, { foreignKey: 'id', as: 'book_id' })
     }
 }
 

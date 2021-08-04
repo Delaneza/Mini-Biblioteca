@@ -1,73 +1,69 @@
-const Author = require('../models/Author')
+const AuthorService = require('../service/AuthorService')
+const authorService = new AuthorService()
 
 module.exports = {
-    async index(_, res, next) {
-        const authors = await Author.findAll()
 
-        return res.json(authors)
+    async index(_, res, next) {
+        const authors = await authorService.getAll()
+
+        res.json(authors)
 
         next()
     },
     
     async getByPk(req, res, next) {
-        const author = await Author.findByPk(req.params.id)
+        const author = await authorService.getByPk(req.params.id)
 
-        if(!author) {
-            return res.status(400).json({ error: 'Author not found' })
-        }
-
-        return res.json(author)
+        res.json(author)
 
         next()
     },
 
     
     async store(req, res, next) {
-        const { full_name, birthday, gender, published_books } = req.body
+        
+        const { full_name, birthday, gender, published_books, status } = req.body
 
-        const author = await Author.create({ 
+        const author = await authorService.store({ 
             full_name, 
             birthday, 
             gender, 
-            published_books 
+            published_books,
+            status
         })
 
-        return res.json(author)
+        res.json(author)
 
         next()
     },
 
     async update(req, res, next) {
-        
-        const { id } = req.params
-        const { full_name, birthday, gender, published_books } = req.body
 
-        if (!id) {
-            res.status(400).json('Author not found')
-        }
+        const { full_name, birthday, gender, published_books, status } = req.body
 
-        await Author.update({ 
+        await authorService.update({ 
             full_name, 
             birthday, 
             gender, 
-            published_books
-        },
-            { where: { id: req.params.id }
-        })
+            published_books,
+            status
+            },
+            { id: req.params.id }
+        )
 
-        return res.status(200).json('Author Updated')
+        res.status(200).json('Author updated!')
         
         next()
     },
 
     async delete(req, res, next) {
 
-        await Author.destroy({ 
-            where: { id: req.params.id }
-        })
-
-        return res.status(200).json('Author Deleted')
-
+        await authorService.delete(
+            { id: req.params.id }
+        )
+        
+        res.status(200).json('Author deleted!')
+        
         next()
     }
 
