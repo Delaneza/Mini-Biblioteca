@@ -1,19 +1,21 @@
 ## Mini-Biblioteca
-Desafio 01 - Sistema para busca e gerenciamento de livros e autores em uma biblioteca
+Desafio 01 - Sistema de cadastro e gerenciamento de livros e autores em uma biblioteca.
+
+Tem como objetivo simular um sistema de cadastro e gerenciamento de livros de uma biblioteca, permitindo assim a visualização, inserção, alteração e exclusão de qualquer livro ou autor.
 
 ## Características do Sistema
 
 ### Livros
-- Buscar todos os livros
-- Buscar um livro
-- Registrar um livro
+- Buscar todos os livros (ativos ou deletados)
+- Buscar um livro 
+- Cadastrar um novo livro
 - Atualizar um livro
 - Deletar um livro
 
 ### Autores
-- Buscar todos os autores
+- Buscar todos os autores (ativos ou deletados)
 - Buscar um autor
-- Registrar um autor
+- Cadastrar um novo autor
 - Atualizar autor
 - Deletar autor
 
@@ -21,16 +23,16 @@ Desafio 01 - Sistema para busca e gerenciamento de livros e autores em uma bibli
 ## Regras de negócio
 
 ### Livros
-- Todos os livros podem ser modificados por qualquer um
+- Livros podem ser modificados por qualquer um
 - Cada livro pode ter somente um autor
 
 ### Autores
-- Todos os autores podem ser modificados por qualquer um
+- Autores podem ser modificados por qualquer um
 - Um autor pode conter vários livros
 
 
 ## DB MODEL
-file:///home/dlnz/Downloads/model-database-biblioteca.png![image](https://user-images.githubusercontent.com/44629124/126783228-86e7df35-37af-4746-a8a4-9819658fa950.png)
+![DB model](png/model-database-biblioteca.png)
 
 ```sql
 Enum LifecycleStatus {
@@ -38,14 +40,16 @@ Enum LifecycleStatus {
   DELETED
 }
 
-table livro {
+table book {
   id int [pk, increment] // auto-increment
-  nome_completo varchar(50)
-  nome_resumido varchar(50)
-  numero_paginas int
-  sinopse varchar(200)
-  genero varchar
-  id_autor ref
+  full_name varchar
+  short_name varchar
+  pages int
+  synopsis varchar
+  gender varchar
+  publishing_company varchar
+  year string
+  author_id ref
   
   status LifecycleStatus
 
@@ -53,12 +57,12 @@ table livro {
   updated_at timestamp
   }
   
-table autor {
+table author {
   id int [pk, increment] // auto-increment
-  nome varchar
-  aniversario string
-  genero varchar
-  qtd_livros_publicados int
+  full_name varchar
+  birthday string
+  gender varchar
+  published_books int
   
   status LifecycleStatus
 
@@ -67,4 +71,4 @@ table autor {
 }
 
 
-Ref: "autor"."id" < "livro"."id_autor"
+Ref: "author"."id" < "book"."author_id"
